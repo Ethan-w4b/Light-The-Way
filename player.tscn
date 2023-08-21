@@ -1,11 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://diwvjkpdpgi1i"]
+[gd_scene load_steps=13 format=3 uid="uid://diwvjkpdpgi1i"]
 
 [ext_resource type="Texture2D" uid="uid://3a60trnay6ak" path="res://player-animation/player-sprite.png" id="1_jwmwj"]
+[ext_resource type="Script" path="res://player.gd" id="1_q4xve"]
 [ext_resource type="Texture2D" uid="uid://cf1wranegsmq8" path="res://player-animation/player-walk-right-1.png" id="2_52hlm"]
+[ext_resource type="Texture2D" uid="uid://b6phbx2yqekrb" path="res://player-animation/player-idle1.png" id="2_oknds"]
+[ext_resource type="Texture2D" uid="uid://bx64w8a5xiyex" path="res://player-animation/player-walk-left1.png" id="3_mcrn2"]
 [ext_resource type="Texture2D" uid="uid://b1jsjtmsjig6w" path="res://player-animation/player-walk-right-2.png" id="3_oe1kh"]
+[ext_resource type="Texture2D" uid="uid://bg7fvav2o5b2a" path="res://torch.png" id="4_b7wi1"]
+[ext_resource type="Texture2D" uid="uid://ccysimkl57d8v" path="res://player-animation/player-walk-left2.png" id="4_m3oek"]
+[ext_resource type="Texture2D" uid="uid://clf07qewc2veo" path="res://player-animation/player-walk-left3.png" id="5_aqhtc"]
+[ext_resource type="Texture2D" uid="uid://jjmqruq1lk3x" path="res://torch2.png" id="9_4puj0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_baomk"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jwmwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_jwmwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_jwmwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_jwmwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oknds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oknds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oknds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_jwmwj")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mcrn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m3oek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mcrn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aqhtc")
+}],
+"loop": true,
+"name": &"walk-left",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_jwmwj")
@@ -24,11 +77,35 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_esfky"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_b7wi1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4puj0")
+}],
+"loop": true,
+"name": &"flame",
+"speed": 5.0
+}]
+
 [node name="Player" type="Area2D"]
+position = Vector2(3, 6)
+script = ExtResource("1_q4xve")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(0.5, 0.5)
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_baomk")
-animation = &"walk-right"
+animation = &"Idle"
+frame_progress = 0.437736
+
+[node name="torch" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(32, 6)
+scale = Vector2(5, 4.708)
+sprite_frames = SubResource("SpriteFrames_esfky")
+animation = &"flame"
